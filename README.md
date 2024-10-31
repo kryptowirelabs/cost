@@ -23,7 +23,7 @@ COST (Cloud Optimization Strategy for Telcos) is a tool designed to help telecom
    - A **Total Cost per Hour** calculation for each VNF is shown, with a grand total summarizing all deployment costs.
 
 ### Quadrant 4. **Process Details and Latency Calculation**
-   - Users can select a specific VNF (e.g., AMF) and view the processes associated with that VNF (e.g., Registration, Session Management, Authentication).
+git config --global user.email "you@example.com"   - Users can select a specific VNF (e.g., AMF) and view the processes associated with that VNF (e.g., Registration, Session Management, Authentication).
    - The selected process's sequence diagram is displayed, showing the HTTP message flow and associated steps.
    - **Total Latency** for the selected process is calculated dynamically based on VNF locations and displayed above the diagram.
    - This feature provides valuable insights into latency impacts for different configurations.
@@ -57,17 +57,8 @@ The application will start on http://localhost:3000
 
 ### Back-end Server
 ```
-cd backend;
-npm start;
+cd backend/src;
+node server.js
 ```
-The application will start on http://localhost:3000
+The server will start on http://localhost:5001
 
-
-
-```
-cd vnf-demo;
-rm package-lock.json;
-npm install;
-npm start;
-```
-The application will start on http://localhost:3000
