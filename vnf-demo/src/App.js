@@ -42,14 +42,14 @@ function App() {
   };
 
   const wavelengthZoneOptions = {
-    "US-East: N. Virginia": ["Atlanta-WZ", "Chicago-WZ", "NYC-WZ"],
-    "US-West: Oregon": ["Seattle-WZ", "Denver-WZ", "LA-WZ"],
-    "Canada-Central": ["Toronto-WZ"],
-    "Europe - London": ["London-WZ"],
-    "Europe - Frankfurt": ["Berlin-WZ"],
-    "Asia-Pacific: Tokyo": ["Tokyo-WZ"],
-    "Asia-Pacific: Seoul": ["Seoul-WZ"],
-    "Asia-Pacific: Sydney": ["Perth-WZ", ""]
+    "US-East: N. Virginia": ["Atlanta", "Chicago", "NYC"],
+    "US-West: Oregon": ["Seattle", "Denver", "LA"],
+    "Canada-Central": ["Toronto"],
+    "Europe - London": ["London"],
+    "Europe - Frankfurt": ["Berlin"],
+    "Asia-Pacific: Tokyo": ["Tokyo"],
+    "Asia-Pacific: Seoul": ["Seoul"],
+    "Asia-Pacific: Sydney": ["Perth", ""]
   };
 
   const handleLocationUpdate = (locationType, locationValue) => {
@@ -143,12 +143,25 @@ function App() {
   };
 
   const toggleActiveZone = () => {
-    if (isLZDisabled) {
-      alert("No edge zone available");
-    } else {
-      setActiveZone((prevZone) => (prevZone === "WZ" ? "LZ" : "WZ"));
-    }
+    // Determine the source and target zones
+    const sourceZone = activeZone;
+    const targetZone = activeZone === "WZ" ? "LZ" : "WZ";
+  
+    // Get VNFs in the current active zone and move them to the other zone
+    setRegions((prev) => {
+      const updatedRegions = { ...prev };
+      
+      // Move all VNFs from sourceZone to targetZone
+      updatedRegions[targetZone] = [...updatedRegions[targetZone], ...updatedRegions[sourceZone]];
+      updatedRegions[sourceZone] = [];
+  
+      return updatedRegions;
+    });
+  
+    // Toggle active zone after moving VNFs
+    setActiveZone(targetZone);
   };
+  
 
   return (
     <DndProvider backend={HTML5Backend}>

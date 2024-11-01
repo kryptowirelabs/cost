@@ -2,8 +2,8 @@
 
 const interSiteLatencies = {
   "US-East: N. Virginia": {
-    WZ: { Atlanta: 10, NYC: 10, Chicago: 12 },
-    LZ: { Atlanta: 10, NYC: 10, Chicago: 12 }
+    WZ: { Atlanta: 34, NYC: 14, Chicago: 58 },
+    LZ: { Atlanta: 16, NYC: 8, Chicago: 24 }
   },
   // Additional regions...
 };

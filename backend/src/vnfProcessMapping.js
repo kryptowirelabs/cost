@@ -23,6 +23,18 @@ const vnfProcessMapping = {
       { procedure: 'Mutual Authentication', indexEntry: '3' },
       { procedure: 'Mutual Authentication', indexEntry: '4' },
     ],
+    'Session Setup - SMF Only': [
+      { procedure: 'Session Setup', indexEntry: '2' },
+      { procedure: 'Session Setup', indexEntry: '5' },
+      { procedure: 'Session Setup', indexEntry: '6' },
+    ],
+    'End-to-end Session Setup': [
+      { procedure: 'Session Setup', indexEntry: '2' },
+      { procedure: 'Session Setup', indexEntry: '5' },
+      { procedure: 'Session Setup', indexEntry: '6' },
+      { procedure: 'VNF Discovery from NRF', indexEntry: '1' },
+      { procedure: 'VNF Discovery from NRF', indexEntry: '2' },
+    ],
   },
   // TODO: Add other VNFs...
 };
