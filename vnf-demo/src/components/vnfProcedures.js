@@ -8,19 +8,49 @@ const vnfProcedures = {
       ]
     },
     {
-      name: "Session Management",
+      name: "SMF Discovery",
       steps: [
-        { from: "AMF", to: "SMF", endpoint: "POST /nsmf-session/v1/sm-contexts", positionTop: 150, positionLeft: 200 },
-        { from: "SMF", to: "UPF", endpoint: "GET /nsmf-pdusession/v1/sm-contexts", positionTop: 250, positionLeft: 350 },
-        { from: "AMF", to: "AUSF", endpoint: "POST /nausf-auth/v1/authentication", positionTop: 300, positionLeft: 450 },
+        { from: "AMF", to: "NRF", endpoint: "GET /nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF", positionTop: 150, positionLeft: 200 },
+        { from: "NRF", to: "AMF", endpoint: "/nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF Response", positionTop: 200, positionLeft: 300 },
       ]
     },
     {
-      name: "Authentication",
+      name: "5G-AKA - Serving Network Only",
       steps: [
         { from: "AMF", to: "AUSF", endpoint: "POST /nausf-auth/v1/ue-authentications", positionTop: 120, positionLeft: 180 },
-        { from: "AUSF", to: "UDM", endpoint: "GET /nudm-ueau/v1/imsi/security-information", positionTop: 220, positionLeft: 280 },
-        { from: "UDM", to: "UDR", endpoint: "GET /nudr-dr/v1/subscription-data/{imsi}/auth", positionTop: 320, positionLeft: 380 },
+        { from: "AUSF", to: "AMF", endpoint: "SE AV, KSEAF Response", positionTop: 220, positionLeft: 280 },
+        { from: "AMF", to: "AUSF", endpoint: "PUT /nausf-auth/v1/ueauthentications/#id/5g-aka-confirmation", positionTop: 320, positionLeft: 380 },
+      ]
+    },
+    {
+      name: "End-to-end 5G-AKA",
+      steps: [
+        { from: "AMF", to: "AUSF", endpoint: "POST /nausf-auth/v1/ue-authentications", positionTop: 120, positionLeft: 180 },
+        { from: "AUSF", to: "UDM", endpoint: "POST /nudmueau/v1/#imsi/securityinformation/generate-auth-data", positionTop: 220, positionLeft: 280 },
+        { from: "UDM", to: "UDR", endpoint: "PATCH/nudr-dr/v1/subscriptiondata/#imsi/authentication-data", positionTop: 320, positionLeft: 380 },
+        { from: "UDM", to: "UDR", endpoint: "GET /nudrdr/v1/subscriptiondata/#imsi/authentication-data/authenticationsubscription", positionTop: 320, positionLeft: 380 },
+        { from: "AMF", to: "AUSF", endpoint: "PUT /nausf-auth/v1/ueauthentications/#id/5g-aka-confirmation", positionTop: 320, positionLeft: 380 },
+        { from: "AUSF", to: "UDM", endpoint: "POST /nudmueau/v1/#imsi/authevents", positionTop: 320, positionLeft: 380 },
+        { from: "UDM", to: "UDR", endpoint: "GET /nudr-dr/v1/subscriptiondata/#imsi/authentication-data/", positionTop: 320, positionLeft: 380 },
+        { from: "UDM", to: "UDR", endpoint: "PUT /nudr-dr/v1/subscriptiondata/#imsi/authentication-data/", positionTop: 320, positionLeft: 380 },
+      ]
+    },
+    {
+      name: "Session Setup - SMF Only",
+      steps: [
+        { from: "AMF", to: "SMF", endpoint: "POST /nsmf-pdusession/v1/smcontexts", positionTop: 120, positionLeft: 180 },
+        { from: "SMF", to: "AMF", endpoint: "POST /namf-comm/v1/uecontexts/imsi-#imsi/n1n2-messages", positionTop: 220, positionLeft: 280 },
+        { from: "AMF", to: "SMF", endpoint: "POST /nsmf-pdusession/v1/smcontexts/1/modify", positionTop: 320, positionLeft: 380 },
+      ]
+    },
+    {
+      name: "End-to-end Session Setup",
+      steps: [
+        { from: "AMF", to: "NRF", endpoint: "GET /nnrf-disc/v1/nf-instances?target-nf-type=SMF&requester-nf-type=AMF", positionTop: 120, positionLeft: 180 },
+        { from: "AMF", to: "SMF", endpoint: "POST /nsmf-pdusession/v1/smcontexts", positionTop: 120, positionLeft: 180 },
+        { from: "SMF", to: "NRF", endpoint: "GET /nnrf-disc/v1/nf-instances?target-nf-type=UPF&requester-nf-type=SMF", positionTop: 120, positionLeft: 180 },
+        { from: "SMF", to: "AMF", endpoint: "POST /namf-comm/v1/uecontexts/imsi-#imsi/n1n2-messages", positionTop: 220, positionLeft: 280 },
+        { from: "AMF", to: "SMF", endpoint: "POST /nsmf-pdusession/v1/smcontexts/1/modify", positionTop: 320, positionLeft: 380 },
       ]
     },
   ],

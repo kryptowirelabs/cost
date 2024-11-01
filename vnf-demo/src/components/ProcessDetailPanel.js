@@ -64,7 +64,7 @@ const ProcessDetailPanel = ({ vnf, vnfLocations }) => {
             {/* Display the total latency above the SVG */}
             {processLatency !== null && (
               <div className="latency-display mb-3">
-                <span className="badge bg-primary">
+                <span className="badge bg-primary" style={{ fontSize: '1.5rem' }}>
                   Total Latency: {processLatency} ms
                 </span>
               </div>

@@ -3,28 +3,28 @@
 const vnfProcessMapping = {
   AMF: {
     'Registration': [{ procedure: 'VNF Registration with NRF', indexEntry: '3' }],
-    'UE Registration': [{ procedure: 'UE Registration', indexEntry: '1' }],
-    'Mutual Authentication': [{ procedure: 'Mutual Authentication', indexEntry: '1' }],
-    'Session Setup': [
-      { procedure: 'Session Setup', indexEntry: '1' },
-      { procedure: 'Session Setup', indexEntry: '2' },
-      { procedure: 'Session Setup', indexEntry: '6' }
+    'SMF Discovery': [{ procedure: 'VNF Discovery from NRF', indexEntry: '1' },],
+    '': [{ procedure: 'Mutual Authentication', indexEntry: '1' }],
+    '5G-AKA - Serving Network Only': [
+      { procedure: 'UE Registration', indexEntry: '1' },
+      //{ procedure: 'UE Registration', indexEntry: '5' },
+      //{ procedure: 'UE Registration', indexEntry: '6' },
+      { procedure: 'Mutual Authentication', indexEntry: '1' }
+    ],
+    'End-to-end 5G-AKA': [
+      { procedure: 'UE Registration', indexEntry: '1' },
+      { procedure: 'UE Registration', indexEntry: '2' },
+      { procedure: 'UE Registration', indexEntry: '3' },
+      { procedure: 'UE Registration', indexEntry: '4' },
+      //{ procedure: 'UE Registration', indexEntry: '5' },
+      //{ procedure: 'UE Registration', indexEntry: '6' },
+      { procedure: 'Mutual Authentication', indexEntry: '1' },
+      { procedure: 'Mutual Authentication', indexEntry: '2' },
+      { procedure: 'Mutual Authentication', indexEntry: '3' },
+      { procedure: 'Mutual Authentication', indexEntry: '4' },
     ],
   },
-  SMF: {
-    'VNF Registration with NRF': [{ procedure: 'VNF Registration with NRF', indexEntry: '2' }],
-    'VNF Discovery from NRF': [{ procedure: 'VNF Discovery from NRF', indexEntry: '2' }],
-    'Session Setup': [
-      { procedure: 'Session Setup', indexEntry: '3' },
-      { procedure: 'Session Setup', indexEntry: '4' },
-      { procedure: 'Session Setup', indexEntry: '5' }
-    ],
-  },
-  UPF: {
-    'VNF Registration with NRF': [{ procedure: 'VNF Registration with NRF', indexEntry: '1' }],
-    'VNF Metadata Update to NRF': [{ procedure: 'VNF Metadata Update to NRF', indexEntry: '3' }]
-  },
-  // Add other VNFs similarly...
+  // TODO: Add other VNFs...
 };
 
 module.exports = vnfProcessMapping;

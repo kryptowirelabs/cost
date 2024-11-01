@@ -13,8 +13,8 @@ const procedures = [
   {
     name: 'VNF Discovery from NRF',
     steps: [
-      {indexEntry: '1', from: 'AMF', to: 'NRF', endpoint: 'GET /nnrf-disc/v1/nf-instances?target-nf-type={target}&requester-nf-type={requester}', computationTime: { min: 25, max: 40 } },
-      {indexEntry: '2', from: 'SMF', to: 'NRF', endpoint: 'GET /nnrf-disc/v1/nf-instances?target-nf-type={target}&requester-nf-type={requester}', computationTime: { min: 30, max: 60 } }
+      {indexEntry: '1', from: 'AMF', to: 'NRF', endpoint: 'GET /nnrf-disc/v1/nf-instances?target-nf-type={target}&requester-nf-type={requester}', computationTime: { min: 1, max: 3 } },
+      {indexEntry: '2', from: 'SMF', to: 'NRF', endpoint: 'GET /nnrf-disc/v1/nf-instances?target-nf-type={target}&requester-nf-type={requester}', computationTime: { min: 1, max: 3 } }
     ]
   },
   {
@@ -28,18 +28,18 @@ const procedures = [
   {
     name: 'UE Registration',
     steps: [
-      {indexEntry: '1', from: 'AMF', to: 'AUSF', endpoint: 'POST /nausf-auth/v1/ue-authentications', computationTime: { min: 40, max: 70 } },
+      {indexEntry: '1', from: 'AMF', to: 'AUSF', endpoint: 'POST /nausf-auth/v1/ue-authentications', computationTime: { min: 20, max: 25 } },
       {indexEntry: '2', from: 'AUSF', to: 'UDM', endpoint: 'POST /nudm-ueau/v1/imsi/security-information/generate-auth-data', computationTime: { min: 50, max: 80 } },
       {indexEntry: '3', from: 'UDM', to: 'UDR', endpoint: 'GET /nudr-dr/v1/subscription-data/{imsi}/authentication-subscription', computationTime: { min: 25, max: 45 } },
       {indexEntry: '4', from: 'UDR', to: 'UDM', endpoint: 'PATCH /nudr-dr/v1/subscription-data/{imsi}/authentication-data', computationTime: { min: 10, max: 30 } },
       {indexEntry: '5', from: 'UDM', to: 'AUSF', endpoint: 'Response: KAUSF, HE AV', computationTime: { min: 20, max: 40 } },
-      {indexEntry: '6', from: 'AUSF', to: 'AMF', endpoint: 'Response: SE AV, KSEAF', computationTime: { min: 30, max: 60 } }
+      {indexEntry: '6', from: 'AUSF', to: 'AMF', endpoint: 'Response: SE AV, KSEAF', computationTime: { min: 0, max: 1 } }
     ]
   },
   {
     name: 'Mutual Authentication',
     steps: [
-      {indexEntry: '1', from: 'AMF', to: 'AUSF', endpoint: 'PUT /nausf-auth/v1/ue-authentications/{id}/5g-aka-confirmation', computationTime: { min: 30, max: 55 } },
+      {indexEntry: '1', from: 'AMF', to: 'AUSF', endpoint: 'PUT /nausf-auth/v1/ue-authentications/{id}/5g-aka-confirmation', computationTime: { min: 15, max: 20 } },
       {indexEntry: '2', from: 'AUSF', to: 'UDM', endpoint: 'POST /nudm-ueau/v1/imsi/auth-events', computationTime: { min: 20, max: 40 } },
       {indexEntry: '3', from: 'UDM', to: 'UDR', endpoint: 'GET /nudr-dr/v1/subscription-data/{imsi}/authentication-data', computationTime: { min: 25, max: 50 } },
       {indexEntry: '4', from: 'UDM', to: 'UDR', endpoint: 'PUT /nudr-dr/v1/subscription-data/{imsi}/authentication-data', computationTime: { min: 10, max: 35 } }
